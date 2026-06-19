@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== METADATA ========== -->
+    <!-- Tells the browser what character set to use (always UTF-8 for modern web) -->
+    <meta charset="UTF-8">
+    
+    <!-- Makes the site responsive on mobile. WITHOUT this, mobile browsers
+         render the page at desktop width and zoom out, making text tiny. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Shows up in browser tab and in Google search results -->
+    <title>Zeneasytax - Tax & Accounting Services in Chennai</title>
+    
+    <!-- Shows up under the title in Google search results. Important for SEO. -->
+    <meta name="description" content="Professional tax filing, GST registration, accounting, and financial advisory services for individuals and businesses in Chennai.">
+
+    <!-- ========== FONTS (Google Fonts CDN) ========== -->
+    <!-- These three <link> tags are the recommended way to load Google Fonts.
+         The first two are performance hints; the third actually loads the fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- ========== BOOTSTRAP 5 CSS ========== -->
+    <!-- CDN = a server somewhere on the internet that hosts the file.
+         Using a CDN means you don't need to download/manage Bootstrap files.
+         The "integrity" hash protects against the CDN serving tampered files. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ========== BOOTSTRAP ICONS ========== -->
+    <!-- Free icon set from Bootstrap. We'll use icons like <i class="bi bi-check"></i> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- ========== CUSTOM CSS ========== -->
+    <!-- Bootstrap gives us defaults. This <style> block overrides them with
+         Zeneasytax brand colors and typography. In production, this would
+         normally live in a separate .css file (we'll do that later). -->
+    <style>
+        /* CSS variables (custom properties) — like constants in C#.
+           Define once at the :root level, use anywhere with var(--name).
+           Makes it trivial to change the brand color across the whole site. */
+        :root {
+            --brand-navy: #030264;
+            --brand-navy-dark: #030264;
+            --brand-gold: #138808;
+            --brand-gold-dark: #138808;
+            --bg-light: #F5F7FA;
+            --text-dark: #1A1A1A;
+        }
+
+        /* Apply Inter to all body text */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            /* Improves font rendering on Mac/iOS */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Apply Poppins to all headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--brand-navy) !important;
+        }
+        .navbar-brand .brand-accent {
+            color: var(--brand-gold);
+        }
+        .navbar .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+        }
+        .navbar .nav-link:hover {
+            color: var(--brand-navy) !important;
+        }
+
+        /* ===== BUTTONS ===== */
+        /* We override Bootstrap's .btn-primary to use our navy color */
+        .btn-primary {
+            background-color: var(--brand-navy);
+            border-color: var(--brand-navy);
+            font-weight: 500;
+            padding: 0.625rem 1.5rem;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background-color: var(--brand-navy-dark);
+            border-color: var(--brand-navy-dark);
+        }
+        .btn-accent {
+            background-color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            color: white;
+            font-weight: 500;
+            padding: 0.625rem 1.5rem;
+            border-radius: 4px;
+        }
+        .btn-accent:hover {
+            background-color: var(--brand-gold-dark);
+            border-color: var(--brand-gold-dark);
+            color: white;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background-color: var(--brand-navy);
+            color: white;
+            padding: 6rem 0 5rem 0;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .hero .lead {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        .hero .highlight {
+            color: var(--brand-gold);
+        }
+
+        /* ===== SECTIONS (general spacing) ===== */
+        .section {
+            padding: 5rem 0;
+        }
+        .section-light {
+            background-color: var(--bg-light);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        /* ===== SERVICE CARDS ===== */
+        .service-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(11, 37, 69, 0.1);
+            border-color: var(--brand-gold);
+        }
+        .service-card .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background: var(--brand-navy);
+            color: var(--brand-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .service-card p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* ===== WHY US (feature list) ===== */
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        .feature-item .check-icon {
+            color: var(--brand-gold);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .feature-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .feature-item p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        .contact-info-item .bi {
+            color: var(--brand-gold);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 32px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--brand-navy-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 0 1.5rem 0;
+        }
+        footer h5 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: var(--brand-gold);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE TWEAKS ===== */
+        /* @media queries apply styles only at certain screen sizes.
+           This one targets phones (under 768px wide). */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero {
+                padding: 4rem 0 3rem 0;
+                text-align: center;
+            }
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <!-- navbar-expand-lg: collapses to hamburger menu below "large" breakpoint
+         sticky-top: stays at top of screen as user scrolls
+         bg-white + shadow-sm: white background with subtle shadow -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                Zen<span class="brand-accent">easy</span>tax
+            </a>
+            
+            <!-- Hamburger button — only visible on mobile.
+                 data-bs-toggle is Bootstrap's way of wiring up JS behavior
+                 via attributes. Clicking this toggles the menu below. -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- The actual menu. "collapse navbar-collapse" makes it hide on
+                 mobile (until hamburger is tapped) and show on desktop. -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- ms-auto pushes the list to the right ('margin-start: auto'). -->
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#why-us">Why Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a class="btn btn-accent" href="#contact">Free Consultation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <!-- id="home" makes this scrollable to via #home in the nav link above -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- col-lg-7: on large screens, take 7 of 12 columns; on smaller, full width -->
+                <div class="col-lg-7">
+                    <h1>
+                        Stress-free taxes for 
+                        <span class="highlight">individuals &amp; businesses</span> 
+                        in Chennai.
+                    </h1>
+                    <p class="lead">
+                        From ITR filing to GST compliance to company registration —
+                        we handle the paperwork so you can focus on what matters.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#contact" class="btn btn-accent btn-lg">Get a Free Consultation</a>
+                        <a href="#services" class="btn btn-outline-light btn-lg">View Services</a>
+                    </div>
+                </div>
+                <!-- Right column: placeholder graphic. Real site would have a photo or illustration. -->
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <i class="bi bi-graph-up-arrow" style="font-size: 12rem; color: var(--brand-gold); opacity: 0.85;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Everything you need under one roof</p>
+
+            <!-- g-4 = gap of 4 units between cards (Bootstrap spacing scale) -->
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h3>Income Tax Filing</h3>
+                        <p>ITR filing for salaried, self-employed, and business owners. Maximum refund, zero notices.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+                        <h3>GST Services</h3>
+                        <p>GST registration, monthly returns, annual filing, and audit support — fully managed.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <h3>Accounting &amp; Bookkeeping</h3>
+                        <p>Monthly bookkeeping, financial statements, and ledger management for small businesses.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-building-add"></i>
+                        </div>
+                        <h3>Company Registration</h3>
+                        <p>Private Limited, LLP, OPC, partnership, and proprietorship registration with MCA &amp; ROC.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>TDS &amp; Compliance</h3>
+                        <p>TDS deduction, payment, quarterly returns, and Form 16 generation for your employees.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3>Financial Advisory</h3>
+                        <p>Tax planning, investment guidance, and long-term financial strategy for individuals and firms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY US ========== -->
+    <section id="why-us" class="section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="mb-3">Why Zeneasytax?</h2>
+                    <p class="text-muted mb-4">
+                        We're not a giant firm where you're just a file number.
+                        We're a small, focused team that treats every client like family.
+                    </p>
+
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>Qualified Professionals</h4>
+                            <p>Chartered Accountants and tax experts handling every case personally.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>Transparent Pricing</h4>
+                            <p>Clear, upfront fees. No hidden charges, no surprise bills.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>On-time, Every Time</h4>
+                            <p>We track every deadline so you never pay a late fee or penalty.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>WhatsApp Support</h4>
+                            <p>Quick answers via WhatsApp — no email tag, no waiting on hold.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Bootstrap "stat" cards showing key numbers.
+                         These are placeholders — replace with real numbers when client provides them. -->
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">500+</h2>
+                                <p class="mb-0 text-muted">Clients Served</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">10+</h2>
+                                <p class="mb-0 text-muted">Years Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">₹2Cr+</h2>
+                                <p class="mb-0 text-muted">Tax Saved</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">99%</h2>
+                                <p class="mb-0 text-muted">On-time Filing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="section section-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">About Zeneasytax</h2>
+                    <p class="lead text-muted">
+                        Founded with a simple goal: make tax and compliance work
+                        easy, transparent, and stress-free for small businesses
+                        and individuals across Chennai. We combine the
+                        professionalism of a big firm with the personal attention
+                        of a neighbourhood CA.
+                    </p>
+                    <p class="text-muted">
+                        Our team has filed thousands of returns, registered hundreds
+                        of companies, and helped clients across industries — from
+                        IT freelancers to traditional retailers to modern startups.
+                        Whatever your situation, we've probably handled it before.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Free 30-minute consultation. No obligations.</p>
+
+            <div class="row g-5">
+                <!-- Left: contact details -->
+                <div class="col-lg-5">
+                    <h4 class="mb-4">Reach us directly</h4>
+
+                    <div class="contact-info-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <div>
+                            <strong>Office Address</strong><br>
+                            <span class="text-muted">[Client to provide], Chennai, Tamil Nadu</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div>
+                            <strong>Phone</strong><br>
+                            <span class="text-muted">+91-XXXXX-XXXXX</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            <span class="text-muted">contact@zeneasytax.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i class="bi bi-whatsapp"></i>
+                        <div>
+                            <strong>WhatsApp</strong><br>
+                            <span class="text-muted">+91-XXXXX-XXXXX</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i class="bi bi-clock-fill"></i>
+                        <div>
+                            <strong>Office Hours</strong><br>
+                            <span class="text-muted">Mon-Sat: 10am - 7pm | Sun: Closed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: contact form -->
+                <!-- IMPORTANT: This form is VISUAL ONLY at this stage. It looks like
+                     it works but pressing Submit does nothing yet. We'll wire it to
+                     the ASP.NET Web API in Stage 2/3. -->
+                <div class="col-lg-7">
+                    <div class="p-4 p-md-5 bg-light rounded">
+                        <h4 class="mb-4">Send us a message</h4>
+                        <form onsubmit="event.preventDefault(); alert('Form submission will be wired up in Stage 2 with the ASP.NET API.');">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone *</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="service" class="form-label">Service Needed</label>
+                                    <select class="form-select" id="service">
+                                        <option selected>Select a service...</option>
+                                        <option>Income Tax Filing</option>
+                                        <option>GST Services</option>
+                                        <option>Accounting &amp; Bookkeeping</option>
+                                        <option>Company Registration</option>
+                                        <option>TDS &amp; Compliance</option>
+                                        <option>Financial Advisory</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="4" placeholder="Tell us briefly about your requirement..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <h5 style="font-size: 1.5rem; font-family: 'Poppins', sans-serif;">
+                        Zen<span style="color: var(--brand-gold);">easy</span>tax
+                    </h5>
+                    <p style="margin-top: 1rem;">
+                        Professional tax, accounting, and compliance services
+                        for individuals and businesses across Chennai.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">Home</a></li>
+                        <li class="mb-2"><a href="#services">Services</a></li>
+                        <li class="mb-2"><a href="#why-us">Why Us</a></li>
+                        <li class="mb-2"><a href="#about">About</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="mb-2"><i class="bi bi-telephone me-2"></i> +91-XXXXX-XXXXX</p>
+                    <p class="mb-2"><i class="bi bi-envelope me-2"></i> contact@zeneasytax.com</p>
+                    <p class="mb-2"><i class="bi bi-geo-alt me-2"></i> Chennai, Tamil Nadu</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Zeneasytax. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== BOOTSTRAP 5 JAVASCRIPT ========== -->
+    <!-- This must be loaded for the navbar hamburger menu and other interactive
+         components to work. "bundle" includes Popper.js (needed for dropdowns, tooltips).
+         Placed at end of <body> for faster page rendering. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

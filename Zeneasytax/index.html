@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeneasytax - Tax & Accounting Services in Chennai</title>
+    <meta name="description" content="Professional tax filing, GST registration, accounting, and financial advisory services for individuals and businesses in Chennai.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-navy: #0B2545;
+            --brand-navy-dark: #061a35;
+            --brand-gold: #D4A24C;
+            --brand-gold-dark: #b88a3a;
+            --bg-light: #F5F7FA;
+            --text-dark: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--brand-navy) !important;
+        }
+        .navbar-brand .brand-accent { color: var(--brand-gold); }
+        .navbar .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+        }
+        .navbar .nav-link:hover { color: var(--brand-navy) !important; }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background-color: var(--brand-navy);
+            border-color: var(--brand-navy);
+            font-weight: 500;
+            padding: 0.625rem 1.5rem;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background-color: var(--brand-navy-dark);
+            border-color: var(--brand-navy-dark);
+        }
+        .btn-accent {
+            background-color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            color: white;
+            font-weight: 500;
+            padding: 0.625rem 1.5rem;
+            border-radius: 4px;
+        }
+        .btn-accent:hover {
+            background-color: var(--brand-gold-dark);
+            border-color: var(--brand-gold-dark);
+            color: white;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background-color: var(--brand-navy);
+            color: white;
+            padding: 6rem 0 5rem 0;
+        }
+        .hero h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 1.5rem; }
+        .hero .lead { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; }
+        .hero .highlight { color: var(--brand-gold); }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 5rem 0; }
+        .section-light { background-color: var(--bg-light); }
+        .section-title { text-align: center; margin-bottom: 1rem; }
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        /* ===== SERVICE CARDS ===== */
+        .service-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(11, 37, 69, 0.1);
+            border-color: var(--brand-gold);
+        }
+        .service-card .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background: var(--brand-navy);
+            color: var(--brand-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .service-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .service-card p { color: #6c757d; margin-bottom: 0; }
+
+        /* ===== WHY US ===== */
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        .feature-item .check-icon {
+            color: var(--brand-gold);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .feature-item h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .feature-item p { color: #6c757d; margin-bottom: 0; }
+
+        /* ===== CONTACT CARDS ===== */
+        .contact-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.75rem;
+            height: 100%;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(11, 37, 69, 0.1);
+            border-color: var(--brand-gold);
+        }
+        /* Same navy box + gold icon as the service cards */
+        .contact-card .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: var(--brand-navy);
+            color: var(--brand-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .contact-card-text { display: flex; flex-direction: column; }
+        .contact-card-text strong {
+            font-size: 1rem;
+            color: var(--brand-navy);
+            margin-bottom: 0.25rem;
+        }
+        .contact-card-text span { font-size: 0.9rem; line-height: 1.5; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--brand-navy-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 0 1.5rem 0;
+        }
+        footer h5 { color: white; margin-bottom: 1rem; font-size: 1rem; }
+        footer a { color: rgba(255, 255, 255, 0.8); text-decoration: none; }
+        footer a:hover { color: var(--brand-gold); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 4rem 0 3rem 0; text-align: center; }
+            .section { padding: 3rem 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                Zen<span class="brand-accent">easy</span>tax
+            </a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#why-us">Why Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1>
+                        Stress-free taxes for
+                        <span class="highlight">individuals &amp; businesses</span>
+                        in Chennai.
+                    </h1>
+                    <p class="lead">
+                        From ITR filing to GST compliance to company registration —
+                        we handle the paperwork so you can focus on what matters.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#services" class="btn btn-outline-light btn-lg">View Services</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <i class="bi bi-graph-up-arrow" style="font-size: 12rem; color: var(--brand-gold); opacity: 0.85;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Everything you need under one roof</p>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-file-earmark-text"></i></div>
+                        <h3>Income Tax Filing</h3>
+                        <p>ITR filing for salaried, self-employed, and business owners. Maximum refund, zero notices.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-receipt"></i></div>
+                        <h3>GST Services</h3>
+                        <p>GST registration, monthly returns, annual filing, and audit support — fully managed.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-calculator"></i></div>
+                        <h3>Accounting &amp; Bookkeeping</h3>
+                        <p>Monthly bookkeeping, financial statements, and ledger management for small businesses.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-building-add"></i></div>
+                        <h3>Company Registration</h3>
+                        <p>Private Limited, LLP, OPC, partnership, and proprietorship registration with MCA &amp; ROC.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-shield-check"></i></div>
+                        <h3>TDS &amp; Compliance</h3>
+                        <p>TDS deduction, payment, quarterly returns, and Form 16 generation for your employees.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="icon-wrapper"><i class="bi bi-graph-up"></i></div>
+                        <h3>Financial Advisory</h3>
+                        <p>Tax planning, investment guidance, and long-term financial strategy for individuals and firms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY US ========== -->
+    <section id="why-us" class="section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="mb-3">Why Zeneasytax?</h2>
+                    <p class="text-muted mb-4">
+                        We're not a giant firm where you're just a file number.
+                        We're a small, focused team that treats every client like family.
+                    </p>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>Qualified Professionals</h4>
+                            <p>Chartered Accountants and tax experts handling every case personally.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>Transparent Pricing</h4>
+                            <p>Clear, upfront fees. No hidden charges, no surprise bills.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>On-time, Every Time</h4>
+                            <p>We track every deadline so you never pay a late fee or penalty.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill check-icon"></i>
+                        <div>
+                            <h4>WhatsApp Support</h4>
+                            <p>Quick answers via WhatsApp — no email tag, no waiting on hold.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">500+</h2>
+                                <p class="mb-0 text-muted">Clients Served</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">10+</h2>
+                                <p class="mb-0 text-muted">Years Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">₹2Cr+</h2>
+                                <p class="mb-0 text-muted">Tax Saved</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded text-center">
+                                <h2 style="color: var(--brand-navy); font-size: 2.5rem;">99%</h2>
+                                <p class="mb-0 text-muted">On-time Filing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="section section-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">About Zeneasytax</h2>
+                    <p class="lead text-muted">
+                        Founded with a simple goal: make tax and compliance work
+                        easy, transparent, and stress-free for small businesses
+                        and individuals across Chennai. We combine the
+                        professionalism of a big firm with the personal attention
+                        of a neighbourhood CA.
+                    </p>
+                    <p class="text-muted">
+                        Our team has filed thousands of returns, registered hundreds
+                        of companies, and helped clients across industries — from
+                        IT freelancers to traditional retailers to modern startups.
+                        Whatever your situation, we've probably handled it before.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Reach us directly through any of the channels below</p>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-card">
+                        <div class="icon-wrapper"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="contact-card-text">
+                            <strong>Office Address</strong>
+                            <span class="text-muted">12 A, New No: 124/2/2,<br> Redhills Road,Kolathur,<br> Chennai - 600099.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-card">
+                        <div class="icon-wrapper"><i class="bi bi-telephone-fill"></i></div>
+                        <div class="contact-card-text">
+                            <strong>Phone</strong>
+                            <span class="text-muted">+91-8015159050</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-card">
+                        <div class="icon-wrapper"><i class="bi bi-whatsapp"></i></div>
+                        <div class="contact-card-text">
+                            <strong>WhatsApp</strong>
+                            <span class="text-muted">+91-8015159050</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-card">
+                        <div class="icon-wrapper"><i class="bi bi-envelope-fill"></i></div>
+                        <div class="contact-card-text">
+                            <strong>Email</strong>
+                            <span class="text-muted">zeneasytax@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-card">
+                        <div class="icon-wrapper"><i class="bi bi-clock-fill"></i></div>
+                        <div class="contact-card-text">
+                            <strong>Office Hours</strong>
+                            <span class="text-muted">Mon-Sat: 10am - 7pm<br>Sun: Closed</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <h5 style="font-size: 1.5rem; font-family: 'Poppins', sans-serif;">
+                        Zen<span style="color: var(--brand-gold);">easy</span>tax
+                    </h5>
+                    <p style="margin-top: 1rem;">
+                        Professional tax, accounting, and compliance services
+                        for individuals and businesses across Chennai.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">Home</a></li>
+                        <li class="mb-2"><a href="#services">Services</a></li>
+                        <li class="mb-2"><a href="#why-us">Why Us</a></li>
+                        <li class="mb-2"><a href="#about">About</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p class="mb-2"><i class="bi bi-telephone me-2"></i> +91-8015159050</p>
+                    <p class="mb-2"><i class="bi bi-envelope me-2"></i> zeneasytax@gmail.com</p>
+                    <p class="mb-2"><i class="bi bi-geo-alt me-2"></i> Chennai, Tamil Nadu</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Zeneasytax. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
